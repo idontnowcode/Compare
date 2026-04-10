@@ -5,7 +5,8 @@ from PyQt6.QtWidgets import (
     QFormLayout, QCheckBox, QColorDialog, QFontDialog
 )
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont, QColor, QSettings
+from PyQt6.QtCore import QSettings
+from PyQt6.QtGui import QFont, QColor
 
 from ui.text_compare import set_theme, DARK_THEME, LIGHT_THEME, _THEME
 
