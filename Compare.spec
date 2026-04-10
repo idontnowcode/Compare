@@ -5,9 +5,6 @@ from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs
 
 block_cipher = None
 
-# PyQt6 플러그인 경로
-pyqt6_path = os.path.dirname(__import__('PyQt6').__file__)
-
 a = Analysis(
     ['main.py'],
     pathex=['.'],
@@ -44,9 +41,6 @@ a = Analysis(
     hooksconfig={},
     runtime_hooks=[],
     excludes=['tkinter', 'matplotlib', 'numpy', 'scipy'],
-    win_no_prefer_redirects=False,
-    win_private_assemblies=False,
-    cipher=block_cipher,
     noarchive=False,
 )
 
@@ -66,11 +60,11 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,          # 콘솔 창 숨김 (GUI 앱)
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    # Windows에서 아이콘 설정 시: icon='icon.ico'
+    # icon='icon.ico',  # uncomment to set a custom icon
 )

@@ -1,13 +1,42 @@
 @echo off
-REM Windows용 빌드 스크립트
-REM 실행 전: pip install -r requirements.txt pyinstaller
+chcp 65001 > nul
 
-echo [1/3] 의존성 설치 중...
-pip install -r requirements.txt pyinstaller
+REM Compare App - Windows Build Script
+REM Requirements: Python 3.11+ installed
 
-echo [2/3] 실행 파일 빌드 중...
-pyinstaller Compare.spec --clean
+echo ================================
+echo  Compare App - Build
+echo ================================
+echo.
 
-echo [3/3] 완료!
-echo 결과물: dist\Compare.exe
+REM Check Python
+python --version > nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] Python not found. Please install Python 3.11+
+    echo         https://www.python.org/downloads/
+    pause
+    exit /b 1
+)
+
+echo [1/3] Installing dependencies...
+python -m pip install -r requirements.txt pyinstaller --upgrade
+if errorlevel 1 (
+    echo [ERROR] pip install failed.
+    pause
+    exit /b 1
+)
+
+echo.
+echo [2/3] Building executable...
+python -m PyInstaller Compare.spec --clean
+if errorlevel 1 (
+    echo [ERROR] Build failed.
+    pause
+    exit /b 1
+)
+
+echo.
+echo [3/3] Done!
+echo Output: dist\Compare.exe
+echo.
 pause
